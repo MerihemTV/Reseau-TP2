@@ -1,6 +1,9 @@
 #pragma once
 
 #include <cstdint>
+#include <ios>
+#include "streams.hpp"
+
 
 using ReplicationClassID = uint32_t;
 
@@ -12,5 +15,8 @@ static GameObject* CreateInstance() {return new className();}       \
 class GameObject
 {
 public:
-
+	REPLICATED('GOBJ', GameObject);
+	virtual void Destroy() {};
+	virtual void Read(InputStream& stream) {};
+	virtual void Write(OutputStream& stream) {};
 };
