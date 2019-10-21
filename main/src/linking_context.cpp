@@ -1,9 +1,20 @@
 #include "linking_context.hpp"
 
+#include <iostream>
+
 bool linking_context::addToContext(GameObject* obj, NetworkID id) {
-	auto [it, success] = m_idToObj.insert({ id,obj });
-	auto [it2, success2] = m_objToId.insert({ obj,id });
-	return (success && success2);
+	auto is_obj_existing = GameObjectFromID(id);
+	auto is_id_existing = IDFromGameObject(obj);
+
+	if (is_obj_existing != std::nullopt || is_id_existing != std::nullopt) {
+		return false;
+	}
+	else {
+		m_idToObj.insert({ id,obj });
+		m_objToId.insert({ obj,id });
+		return true;
+	}
+	
 }
 
 std::optional<NetworkID> linking_context::IDFromGameObject(GameObject* obj) {
