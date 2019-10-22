@@ -5,7 +5,8 @@ class Enemy : public GameObject
 {
 public:
 	REPLICATED('ENEM', Enemy);
-
+	Enemy();
+	Enemy(float x, float y, float z, std::string name, float rotx, float roty, float rotz, float rotw);
 	virtual void Read(InputStream& stream)
 	{
 		m_posX = stream.Read<float>();
