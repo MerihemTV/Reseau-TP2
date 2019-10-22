@@ -1,4 +1,3 @@
-//mClassID étant le nom de la valeur de l’enum de votre identifiant de classe => ex ENEM ou PLAY ou GOBJ
 #include <map>
 #include "game_object.hpp"
 #include <vector>
@@ -8,9 +7,18 @@ class classRegistry
 {
 public:
 
+	static classRegistry* get() {
+		if (singleton==NULL) {
+			singleton = new classRegistry();
+		}
+		return singleton;
+	}
+
+	~classRegistry();
+
 	template<typename T>
-	static void saveClassInRegistry(std::function<GameObject()> f) {
-		idToConstructor.insert({ T::mClassID, f });
+	void saveClassInRegistry(std::function<GameObject()> f) {
+		idToConstructor.insert({T::mClassID,f});
 	};
 
 	GameObject create(int id) {
@@ -20,6 +28,9 @@ public:
 	}
 
 private:
+	classRegistry() {};
 	//lie des identifiants de classes avec les pointeurs des constructeurs
 	std::map<int, std::function <GameObject()>> idToConstructor; 
+
+	static classRegistry* singleton;
 };
