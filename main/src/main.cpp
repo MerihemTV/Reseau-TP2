@@ -21,15 +21,10 @@ void conn(uvw::Loop& loop) {
 	tcp->connect(std::string{ "127.0.0.1" }, 4242);
 }
 
-Player ConstructorFake() {
-	Player p;
-	return p;
-}
 
 int main(int argc, char* argv[]) {
 	classRegistry& CR = classRegistry::getInstance();
-	CR.saveClassInRegistry<Player>(ConstructorFake);
-	//CR->saveClassInRegistry<Player>(ConstructorFake);
+	CR.saveClassInRegistry<Player>();
 	/*
 	std::string status = argv[1];
 	std::string addr = argv[2];

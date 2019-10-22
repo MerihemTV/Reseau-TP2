@@ -13,13 +13,13 @@ public:
 	}
 
 	template<typename T>
-	void saveClassInRegistry(std::function<GameObject()> f) {
-		idToConstructor.insert({T::mClassID,f});
+	void saveClassInRegistry() {
+		idToConstructor.emplace(T::mClassID,T::CreateInstance);
 	};
 
-	GameObject create(int id) {
-		std::function<GameObject()> Constructor = idToConstructor.find(id)->second;
-		GameObject result = Constructor();
+	GameObject* create(int id) {
+		std::function<GameObject*()> Constructor = idToConstructor.find(id)->second;
+		GameObject* result = Constructor();
 		return(result);
 	}
 
@@ -28,5 +28,5 @@ public:
 private:
 	classRegistry() {};
 	//lie des identifiants de classes avec les pointeurs des constructeurs
-	std::map<int, std::function <GameObject()>> idToConstructor; 
+	std::map<int, std::function<GameObject*()>> idToConstructor; 
 };
