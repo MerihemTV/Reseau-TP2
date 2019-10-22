@@ -42,9 +42,14 @@ std::optional<GameObject *> linking_context::GameObjectFromID(NetworkID id) {
 bool linking_context::deleteObject(GameObject* obj) {
 	auto ID = IDFromGameObject(obj);
 	int i = 0;
-	i += m_idToObj.erase(ID.value());
-	i += m_objToId.erase(obj);
-	return (i == 2);
+	if (ID != std::nullopt) {
+		i += m_idToObj.erase(ID.value());
+		i += m_objToId.erase(obj);
+		return (i == 2);
+	}
+	else {
+		return false;
+	}
 };
 
 //return the NetworkId of GameObject
