@@ -27,7 +27,8 @@ Player ConstructorFake() {
 }
 
 int main(int argc, char* argv[]) {
-	classRegistry *CR = classRegistry::get();
+	classRegistry& CR = classRegistry::getInstance();
+	CR.saveClassInRegistry<Player>(ConstructorFake);
 	//CR->saveClassInRegistry<Player>(ConstructorFake);
 	/*
 	std::string status = argv[1];

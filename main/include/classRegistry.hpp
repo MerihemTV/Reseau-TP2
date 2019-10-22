@@ -7,14 +7,10 @@ class classRegistry
 {
 public:
 
-	static classRegistry* get() {
-		if (singleton==NULL) {
-			singleton = new classRegistry();
-		}
-		return singleton;
+	static classRegistry& getInstance() {
+		static classRegistry instance;
+		return instance;
 	}
-
-	~classRegistry();
 
 	template<typename T>
 	void saveClassInRegistry(std::function<GameObject()> f) {
@@ -27,10 +23,10 @@ public:
 		return(result);
 	}
 
+	classRegistry(classRegistry const&) = delete;
+	void operator=(classRegistry const&) = delete;
 private:
 	classRegistry() {};
 	//lie des identifiants de classes avec les pointeurs des constructeurs
 	std::map<int, std::function <GameObject()>> idToConstructor; 
-
-	static classRegistry* singleton;
 };
