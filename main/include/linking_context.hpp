@@ -17,6 +17,10 @@ public:
 
 	//return true if insertion went well, false otherwise
 	bool addToContext(GameObject* obj, NetworkID id);
+	//return true if deletion went well
+	bool deleteObject(GameObject* obj);
+	//return the NetworkId of GameObject
+	NetworkID addObject(GameObject* obj);
 private:
 	std::map<uint64_t, GameObject*> m_idToObj;
 	std::map<GameObject*, uint64_t> m_objToId;
