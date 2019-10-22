@@ -5,7 +5,7 @@ class Player : public GameObject
 {
 public:
 	REPLICATED('PLAY', Player);
-
+	Player(float x, float y, float z, std::string name, float rotx, float roty, float rotz, float rotw);
 	virtual void Read(InputStream& stream)
 	{
 		m_posX = stream.Read<float>();
