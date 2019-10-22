@@ -1,12 +1,13 @@
 #pragma once
 #include "game_object.hpp"
+#include <iostream>
 
 class Player : public GameObject
 {
 public:
 	REPLICATED('PLAY', Player);
-	Player();
-	Player(float x, float y, float z, std::string name, float rotx, float roty, float rotz, float rotw);
+	Player() {};
+	//Player(float x, float y, float z, std::string name, float rotx, float roty, float rotz, float rotw);
 	virtual void Read(InputStream& stream)
 	{
 		m_posX = stream.Read<float>();

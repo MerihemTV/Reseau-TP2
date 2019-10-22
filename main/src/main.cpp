@@ -2,6 +2,9 @@
 #include <memory>
 #include <iostream>
 #include <server.hpp>
+#include "classRegistry.hpp"
+#include "player.hpp"
+#include "enemy.hpp"
 
 void conn(uvw::Loop& loop) {
 	auto tcp = loop.resource<uvw::TCPHandle>();
@@ -19,6 +22,8 @@ void conn(uvw::Loop& loop) {
 }
 
 int main(int argc, char* argv[]) {
+	classRegistry::saveClassInRegistry<Player>(&Player::Player);
+	/*
 	std::string status = argv[1];
 	std::string addr = argv[2];
 	std::string port = argv[3];
@@ -35,5 +40,6 @@ int main(int argc, char* argv[]) {
 	else {
 		std::cout << "Use: 0 for server, 1 for client" << std::endl;
 	}
+	*/
 	return 0;
 }

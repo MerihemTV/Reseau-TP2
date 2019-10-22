@@ -1,6 +1,6 @@
 #include "player.hpp"
 
-
+/*
 Player::Player(float x, float y, float z, std::string name, float rotx, float roty, float rotz, float rotw) :
 	m_posX(x),
 	m_posY(y),
@@ -9,4 +9,4 @@ Player::Player(float x, float y, float z, std::string name, float rotx, float ro
 	m_rotX(rotx),
 	m_rotY(roty),
 	m_rotW(rotw),
-	m_rotZ(rotz) {}
+	m_rotZ(rotz) {}*/
