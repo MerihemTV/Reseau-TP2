@@ -10,7 +10,6 @@ public:
 	virtual void Read(InputStream& stream);
 	virtual void Write(OutputStream& stream);
 
-
 private:
 	float m_posX;
 	float m_posY;
