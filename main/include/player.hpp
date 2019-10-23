@@ -1,5 +1,6 @@
 #pragma once
 #include "game_object.hpp"
+#include <iostream>
 
 class Player : public GameObject
 {

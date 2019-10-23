@@ -2,4 +2,4 @@
 
 To clone this repo use the command : 
 
-`git clone --recursive https://github.com/VALERE91/network_tp2`
+`git clone --recursive https://github.com/Psychotiik/Reseau-TP2`
