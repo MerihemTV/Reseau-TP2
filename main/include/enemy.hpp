@@ -1,5 +1,6 @@
 #pragma once
 #include "game_object.hpp"
+#include <iostream>
 
 class Enemy : public GameObject
 {
@@ -8,7 +9,7 @@ public:
 
 	virtual void Destroy();
 	virtual void Read(InputStream& stream);
-	virtual void Write(OutputStream& stream);
+	virtual void Write(OutputStream& stream); 
 
 private:
 	float m_posX;

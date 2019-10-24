@@ -3,7 +3,8 @@
 #include <iostream>
 #include "server.hpp"
 #include "client.hpp"
-#include "classRegistry.hpp"
+#include "class_registry.hpp"
+#include "replication_manager.hpp"
 #include "player.hpp"
 #include "enemy.hpp"
 
@@ -51,6 +52,7 @@ void conn(uvw::Loop& loop) {
 
 int main(int argc, char* argv[]) {
 
+
 	//args 
 	std::string status = argv[1];
 	std::string addr = argv[2];
@@ -71,6 +73,16 @@ int main(int argc, char* argv[]) {
 /*
 int main(int argc, char* argv[]) {
 	
+=======
+	ClassRegistry& CR = ClassRegistry::getInstance();
+	CR.saveClassInRegistry<Player>();
+	CR.saveClassInRegistry<Enemy>();
+
+	GameObject* player1 = CR.Create('PLAY');
+	GameObject* enemy1 = CR.Create('ENEM');
+
+	/*
+>>>>>>> a0b63fef90be1066a30d508cdbc3bb67b2c3a665
 	std::string status = argv[1];
 	std::string addr = argv[2];
 	std::string port = argv[3];

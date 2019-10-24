@@ -1,10 +1,12 @@
 #include "player.hpp"
 #include <cmath>
 #include <bitset>
+
 void Player::Destroy()
 {
-
+	std::cout << "Player \"" << m_name << "\" destroyed." << std::endl;
 }
+
 void Player::Read(InputStream& stream)
 {
 	// ================================================================================	//
