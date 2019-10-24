@@ -1,7 +1,8 @@
 #include <uvw.hpp>
 #include <memory>
 #include <iostream>
-#include <server.hpp>
+#include "server.hpp"
+#include "client.hpp"
 #include "classRegistry.hpp"
 #include "player.hpp"
 #include "enemy.hpp"
@@ -58,18 +59,9 @@ int main(int argc, char* argv[]) {
 	
 	if (status == "server") {
 		auto srv = Server("127.0.0.1",4242);
-		
-		/*
-		auto loop = uvw::Loop::getDefault();
-		listen(*loop);
-		loop->run();
-		*/
-		
 	}
 	else if (status == "client") {
-		auto loop = uvw::Loop::getDefault();
-		conn(*loop);
-		loop->run();
+		auto cl = Client();
 	}
 	else {
 		std::cout << "Use: 0 for server, 1 for client" << std::endl;

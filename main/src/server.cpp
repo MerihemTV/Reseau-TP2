@@ -26,7 +26,6 @@ Server::Server(std::string addr, int port) {
 	auto loop = uvw::Loop::getDefault();
 	listenServer(*loop);
 	loop->run();
-	std::cout << "coucou" << std::endl;
 }
 /*
 void Server::listen(uvw::Loop& loop) {
