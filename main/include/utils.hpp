@@ -15,7 +15,7 @@ enum class PlatformEndianness
     LittleEndian
 };
 
-constexpr PlatformEndianness DetectEndianness()
+static PlatformEndianness DetectEndianness()
 {
     union {
         uint32_t i;

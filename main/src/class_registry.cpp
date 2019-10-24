@@ -1,0 +1,1 @@
+#include "class_registry.hpp"

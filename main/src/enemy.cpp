@@ -1,9 +1,10 @@
 #include "enemy.hpp"
 #include <cmath>
 #include <bitset>
+
 void Enemy::Destroy()
 {
-
+	std::cout << "Enemy \"" << m_type << "\" destroyed." << std::endl;
 }
 
 void Enemy::Read(InputStream& stream)
