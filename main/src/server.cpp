@@ -10,21 +10,16 @@ void Server::listenServer(uvw::Loop& loop) {
 		client->on<uvw::CloseEvent>([ptr = srv.shared_from_this()](const uvw::CloseEvent&, uvw::TCPHandle&) { 
 			ptr->close();
 		});
-		client->on<uvw::EndEvent>([tcp](const uvw::EndEvent&, uvw::TCPHandle& client) { 
+		client->on<uvw::EndEvent>([this](const uvw::EndEvent&, uvw::TCPHandle& client) { 
+
+			auto cl = std::find(clients.begin(), clients.end(), client.shared_from_this());
+			clients.erase(cl);
 			client.close(); 
-		});
-		client->on<uvw::DataEvent>([](const uvw::DataEvent&, uvw::TCPHandle&) {
-			std::cout << "Data received" << std::endl; 
 		});
 
 		srv.accept(*client);
 		client->read();
 		clients.push_back(client);
-
-		/*
-		uint8_t data[] = { 4 };
-		Send(data, sizeof(data));
-		*/
 	});
 
 	tcp->bind(m_addr, m_port);
