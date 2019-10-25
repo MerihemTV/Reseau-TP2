@@ -22,25 +22,35 @@ void Server::listenServer(uvw::Loop& loop) {
 		clients.push_back(client);
 
 		/*
-		uint8_t data = 4;
-		Send(&data, sizeof(data));*/
+		uint8_t data[] = { 4 };
+		Send(data, sizeof(data));
+		*/
 	});
 
 	tcp->bind(m_addr, m_port);
 	tcp->listen();
 }
 
+void Server::runner() {
+	loop->run();
+}
 
 Server::Server(std::string addr, int port) {
 	m_addr = addr;
 	m_port = port;
 	loop = uvw::Loop::getDefault();
 	listenServer(*loop);
-	loop->run();
+	loopThread = std::make_unique<std::thread>(&Server::runner, this);
 }
 
+Server::~Server() {
+	if (loopThread->joinable()) {
+		loopThread->join();
+	}
+}
 
-void Server::Send(uint8_t* data, int data_size) {
+void Server::Send(uint8_t* data, int data_size){
+	std::cout << "Sending data" << std::endl;
 	std::for_each(clients.begin(), clients.end(), [data, data_size](auto cl) {
-		cl->write(reinterpret_cast<char*> (data), data_size); });
+		cl->write(reinterpret_cast<char*>(data), data_size); });
 }

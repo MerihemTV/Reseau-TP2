@@ -25,8 +25,15 @@ int main(int argc, char* argv[]) {
 	
 	if (status == "server") {
 		auto srv = Server(addr,port);
-		uint8_t data = 4;
-		srv.Send(&data, sizeof(data));
+		uint8_t data = 'b';
+
+		std::cout << "type send to send a 'b'" << std::endl;
+		while (1) {
+
+			std::string nothing;
+			std::cin >> nothing;
+			srv.Send(&data, sizeof(data));
+		};
 	}
 	else if (status == "client") {
 		auto cl = Client(addr, port);
