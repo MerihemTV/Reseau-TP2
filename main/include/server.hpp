@@ -21,6 +21,7 @@ public:
 	void Send(uint8_t* data, int data_size);
 	void runner();
 	void Run();
+	void PrepareAndSend(OutputStream& os, std::vector<GameObject*>& gameObjects);
 private:
 	std::string m_addr;
 	int m_port;
