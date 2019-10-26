@@ -16,7 +16,10 @@ class GameObject
 {
 public:
 	REPLICATED('GOBJ', GameObject);
+	GameObject() {};
+	~GameObject() {};
 	virtual void Destroy() {};
 	virtual void Read(InputStream& stream) {};
 	virtual void Write(OutputStream& stream) {};
+	virtual void print() {};
 };

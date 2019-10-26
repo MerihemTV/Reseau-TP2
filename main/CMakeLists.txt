@@ -21,8 +21,7 @@ set(replication_headers include/utils.hpp
 						include/linking_context.hpp
 						include/server.hpp
 						include/client.hpp
-						include/replication_manager.hpp
-						include/server.hpp)
+						include/replication_manager.hpp)
 
 add_executable(tp2 ${replication_sources} ${replication_headers})
 target_link_libraries(tp2 PUBLIC uvw_interface GSL)

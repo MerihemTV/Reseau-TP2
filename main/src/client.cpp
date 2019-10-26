@@ -13,8 +13,18 @@ void Client::connect(uvw::Loop& loop, std::string addr, int port) {
 	});
 
 	tcp->on<uvw::DataEvent>([](const uvw::DataEvent& evt, uvw::TCPHandle&) {
-		std::string result( evt.data.get(), evt.length);
+		std::string result(evt.data.get(), evt.length);
 		std::cout <<  result << std::endl;
+		ReplicationManager& replicationManager = ReplicationManager::getInstance();
+
+		InputStream is(result);
+		replicationManager.Replicate(is);
+
+		std::unordered_set<GameObject*> replicatedObject = replicationManager.getReplicatedObjects();
+		for (auto object : replicatedObject)
+		{
+			object->print();
+		}
 	});
 
 	tcp->connect(addr, port);
@@ -33,5 +43,11 @@ void Client::runner() {
 Client::Client(std::string addr, int port) {
 	loop = uvw::Loop::getDefault();
 	connect(*loop, addr, port);
-	loopThread = std::make_unique<std::thread>(&Client::runner, this);
+	loopThread = std::make_unique<std::thread>(&Client::runner, this);	
+
+	// Class Registry Initiation
+	ClassRegistry& classRegistry = ClassRegistry::getInstance();
+	classRegistry.saveClassInRegistry<GameObject>();
+	classRegistry.saveClassInRegistry<Player>();
+	classRegistry.saveClassInRegistry<Enemy>();
 }

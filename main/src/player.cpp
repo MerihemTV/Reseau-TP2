@@ -5,6 +5,7 @@
 void Player::Destroy()
 {
 	std::cout << "Player \"" << m_name << "\" destroyed." << std::endl;
+	delete this;
 }
 
 void Player::Read(InputStream& stream)

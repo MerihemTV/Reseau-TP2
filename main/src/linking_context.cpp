@@ -2,6 +2,21 @@
 
 #include <iostream>
 
+/*bool LinkingContext::addToContext(GameObject* obj, NetworkID id) {
+	auto is_obj_existing = GameObjectFromID(id);
+	auto is_id_existing = IDFromGameObject(obj);
+
+	if (is_obj_existing != std::nullopt || is_id_existing != std::nullopt) {
+		return false;
+	}
+	else {
+		m_idToObj.insert({ id,obj });
+		m_objToId.insert({ obj,id });
+		return true;
+	}
+
+}*/
+
 std::optional<LinkingContext::NetworkID> LinkingContext::IDFromGameObject(GameObject* obj) {
 	auto itFind = m_objToId.find(obj);
 	if (itFind != m_objToId.end()) {
@@ -12,7 +27,7 @@ std::optional<LinkingContext::NetworkID> LinkingContext::IDFromGameObject(GameOb
 	}
 }
 
-std::optional<GameObject *> LinkingContext::GameObjectFromID(NetworkID id) {
+std::optional<GameObject*> LinkingContext::GameObjectFromID(NetworkID id) {
 	auto itFind = m_idToObj.find(id);
 	if (itFind != m_idToObj.end()) {
 		return itFind->second;
@@ -31,10 +46,10 @@ bool LinkingContext::addObject(GameObject* obj, NetworkID id) {
 	if (is_obj_existing != std::nullopt || is_id_existing != std::nullopt) {
 		return false;
 	}
-	else{
+	else {
 		m_idToObj.insert({ id,obj });
 		m_objToId.insert({ obj,id });
-		m_nextID = id++;
+//		m_nextID = id++;
 		return true;
 	}
 }

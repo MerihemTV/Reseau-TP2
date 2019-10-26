@@ -14,13 +14,28 @@ class ReplicationManager {
 	static constexpr uint32_t ms_protocolID = 0xDECEA5ED;
 
 public:
+	static ReplicationManager& getInstance() {
+		static ReplicationManager instance;
+		return instance;
+	}
+
 	void Replicate(OutputStream& stream, const std::vector<GameObject*>& objectsToReplicate);
 	void Replicate(InputStream& stream);
 
-	void AddObject(GameObject* object);
+	void AddObject(GameObject* object, LinkingContext::NetworkID objectID);
 	void RemoveObject(GameObject* object);
 
+	std::unordered_set<GameObject*> getReplicatedObjects()
+	{
+		return m_replicatedObjects;
+	}
+
+	ReplicationManager(ClassRegistry const&) = delete;
+	void operator=(ReplicationManager const&) = delete;
+
 private:
+	ReplicationManager() { m_context = LinkingContext(); };
+
 	LinkingContext m_context;
 
 	enum class PacketType : uint8_t

@@ -49,3 +49,38 @@ void Server::Send(uint8_t* data, int data_size){
 	std::for_each(clients.begin(), clients.end(), [data, data_size](auto cl) {
 		cl->write(reinterpret_cast<char*>(data), data_size); });
 }
+
+void Server::Run()
+{
+	ReplicationManager& replicationManager = ReplicationManager::getInstance();
+
+	std::vector<GameObject*> gameObjects;
+	gameObjects.emplace_back(new Player(-287.542f, 186.301f, 499.998f, "Adrien", -0.457f, 0.532f, 0.425f, -0.572f));
+	gameObjects.emplace_back(new Player(410.2f, 2.321f, -102.54f, "Mehdi", 0.800f, -0.600f, 0.0f, 0.0f));
+	gameObjects.emplace_back(new Player(-245.23f, 147.851f, -500.0f, "Laura", -0.742f, -0.241f, 0.542f, 0.312f));
+
+	gameObjects.emplace_back(new Enemy(253.542f, 475.12f, -14.2f, "Spider", -0.5f, 0.5f, 0.7f, -0.1f));
+	gameObjects.emplace_back(new Enemy(-53.637f, -356.12f, 145.52f, "Zombie", 0.342f, 0.682f, 0.623f, -0.172f));
+	gameObjects.emplace_back(new Enemy(-212.212f, 198.235f, -497.54f, "Skeleton", 0.578f, -0.452f, 0.542f, -0.409f));
+
+	OutputStream os;
+	replicationManager.Replicate(os, gameObjects);
+
+	auto datas = os.Data();
+	uint8_t* dataToSend = NULL;
+	int dataSize = datas.size();
+	dataToSend = new uint8_t[dataSize];
+
+	for (int i = 0; i < dataSize; i++)
+	{
+		dataToSend[i] = static_cast<uint8_t>(datas[i]);
+	}
+	while (1)
+	{
+		std::string nothing;
+		std::cin >> nothing;
+		Send(dataToSend, dataSize);
+		delete[] dataToSend;
+		dataToSend = NULL;
+	}
+}

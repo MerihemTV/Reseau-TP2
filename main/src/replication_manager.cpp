@@ -13,7 +13,7 @@ void ReplicationManager::Replicate(OutputStream& stream, const std::vector<GameO
 	{
 		// Object ID Writing
 		auto objectID = m_context.IDFromGameObject(gameObj);
-		if (!objectID) continue;
+		if (!objectID) objectID = m_context.addObject(gameObj);
 		stream.Write(*objectID);
 		// Class ID Writing
 		auto classID = gameObj->ClassID();
@@ -37,18 +37,18 @@ void ReplicationManager::Replicate(InputStream& stream)
 	while (stream.RemainingSize() > 0)
 	{
 		// Object and Class ID Reading
-		LinkingContext::NetworkID objId = stream.Read<LinkingContext::NetworkID>();
+		LinkingContext::NetworkID objID = stream.Read<LinkingContext::NetworkID>();
 		ReplicationClassID classID = stream.Read<ReplicationClassID>();
 
 		// Object Reading
-		auto gameObj = m_context.GameObjectFromID(objId);
+		auto gameObj = m_context.GameObjectFromID(objID);
 
 		// Non-existing object in linking context
 		if (!gameObj)
 		{
 			GameObject* objCreated = ClassRegistry::getInstance().Create(classID);
 			objCreated->Read(stream);
-			AddObject(objCreated);
+			AddObject(objCreated, objID);
 			receivedObjects.insert(objCreated);
 		}
 
@@ -73,9 +73,9 @@ void ReplicationManager::Replicate(InputStream& stream)
 	}
 }
 
-void ReplicationManager::AddObject(GameObject* object)
+void ReplicationManager::AddObject(GameObject* object, LinkingContext::NetworkID objectID)
 {
-	m_context.addObject(object);
+	m_context.addObject(object, objectID);
 	m_replicatedObjects.insert(object);
 }
 void ReplicationManager::RemoveObject(GameObject* object)
@@ -83,5 +83,4 @@ void ReplicationManager::RemoveObject(GameObject* object)
 	m_context.deleteObject(object);
 	m_replicatedObjects.erase(object);
 	object->Destroy();
-	delete object;
 }

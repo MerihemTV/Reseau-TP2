@@ -3,37 +3,21 @@
 #include <iostream>
 #include "server.hpp"
 #include "client.hpp"
-#include "class_registry.hpp"
-#include "replication_manager.hpp"
-#include "player.hpp"
-#include "enemy.hpp"
-
-#include <iostream>
 
 #include <uvw.hpp>
 #include <memory>
 
 
 int main(int argc, char* argv[]) {
-
-
 	//args 
 	std::string status = argv[1];
 	std::string addr = argv[2];
 	std::string Iport = argv[3];
 	int port = atoi(Iport.c_str());
-	
+
 	if (status == "server") {
-		auto srv = Server(addr,port);
-		uint8_t data = 'b';
-
-		std::cout << "type send to send a 'b'" << std::endl;
-		while (1) {
-
-			std::string nothing;
-			std::cin >> nothing;
-			srv.Send(&data, sizeof(data));
-		};
+		auto srv = Server(addr, port);
+		srv.Run();
 	}
 	else if (status == "client") {
 		auto cl = Client(addr, port);

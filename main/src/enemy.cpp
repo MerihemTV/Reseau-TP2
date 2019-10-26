@@ -5,6 +5,7 @@
 void Enemy::Destroy()
 {
 	std::cout << "Enemy \"" << m_type << "\" destroyed." << std::endl;
+	delete this;
 }
 
 void Enemy::Read(InputStream& stream)
