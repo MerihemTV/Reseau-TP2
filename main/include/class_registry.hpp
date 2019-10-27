@@ -3,7 +3,6 @@
 #include <functional>
 #include <cassert>
 #include "game_object.hpp"
-#include <iostream>
 
 class ClassRegistry
 {
@@ -34,7 +33,6 @@ public:
 	void operator=(ClassRegistry const&) = delete;
 
 private:
-	ClassRegistry() {}
-	//lie des identifiants de classes avec les pointeurs des constructeurs
-	std::map<ReplicationClassID, GameObjectInitializer> m_initializers;
+	ClassRegistry() {}	// Constructor
+	std::map<ReplicationClassID, GameObjectInitializer> m_initializers;		// Link Class IDs with their construct pointer
 };

@@ -186,3 +186,18 @@ void Player::Write(OutputStream& stream)
 	stream.WriteStr(m_name);
 	stream.Write(compressedQuaternion);
 }
+
+void Player::print()
+{
+	std::cout << "=========PLAYER=========\n";
+	std::cout << "Name : " << m_name << "\n";
+	std::cout << "--------position--------\n";
+	std::cout << "X : " << m_posX << "\n";
+	std::cout << "Y : " << m_posY << "\n";
+	std::cout << "Z : " << m_posZ << "\n";
+	std::cout << "--------rotation--------\n";
+	std::cout << "X : " << m_rotX << "\n";
+	std::cout << "Y : " << m_rotY << "\n";
+	std::cout << "Z : " << m_rotZ << "\n";
+	std::cout << "========================\n";
+}

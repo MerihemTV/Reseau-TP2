@@ -186,3 +186,18 @@ void Enemy::Write(OutputStream& stream)
 	stream.WriteStr(m_type);
 	stream.Write(compressedQuaternion);
 }
+
+void Enemy::print()
+{
+	std::cout << "=========ENEMY=========\n";
+	std::cout << "Type : " << m_type<< "\n";
+	std::cout << "--------position--------\n";
+	std::cout << "X : " << m_posX << "\n";
+	std::cout << "Y : " << m_posY << "\n";
+	std::cout << "Z : " << m_posZ << "\n";
+	std::cout << "--------rotation--------\n";
+	std::cout << "X : " << m_rotX << "\n";
+	std::cout << "Y : " << m_rotY << "\n";
+	std::cout << "Z : " << m_rotZ << "\n";
+	std::cout << "========================\n";
+}

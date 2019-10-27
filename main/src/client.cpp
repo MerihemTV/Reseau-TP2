@@ -14,7 +14,6 @@ void Client::connect(uvw::Loop& loop, std::string addr, int port) {
 
 	tcp->on<uvw::DataEvent>([](const uvw::DataEvent& evt, uvw::TCPHandle&) {
 		std::string result(evt.data.get(), evt.length);
-		std::cout <<  result << std::endl;
 		ReplicationManager& replicationManager = ReplicationManager::getInstance();
 
 		InputStream is(result);

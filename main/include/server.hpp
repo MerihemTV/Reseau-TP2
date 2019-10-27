@@ -5,7 +5,6 @@
 #include <iostream>
 #include <thread>
 #include <algorithm>
-#include "class_registry.hpp"
 #include "replication_manager.hpp"
 #include "game_object.hpp"
 #include "player.hpp"
