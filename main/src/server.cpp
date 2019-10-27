@@ -11,7 +11,7 @@ void Server::listenServer(uvw::Loop& loop) {
 			ptr->close();
 		});
 		client->on<uvw::EndEvent>([this](const uvw::EndEvent&, uvw::TCPHandle& client) { 
-
+			std::cout << "Client disconnection" << std::endl;
 			auto cl = std::find(clients.begin(), clients.end(), client.shared_from_this());
 			clients.erase(cl);
 			client.close(); 
@@ -58,8 +58,8 @@ void Server::Run()
 
 	std::cout << "========================================SERVERS COMMANDS========================================\n";
 	std::cout << "init		:	Initialize GameObjects with default samples\n";
-	std::cout << "help		:	Display this informations message\n";
-	std::cout << "creation_test		:	Create Player 'Valère' for replication tests purposes\n";
+	std::cout << "help		:	Display this information message\n";
+	std::cout << "creation_test		:	Create Player 'Valere' for replication tests purposes\n";
 	std::cout << "edition_test		:	Edit 1st GameObject Position X value for replication tests purposes\n";
 	std::cout << "deletion_test		:	Delete 1st GameObject for replication tests purposes\n";
 	std::cout << "send		:	Send GameObjects to all Clients\n";
@@ -84,7 +84,7 @@ void Server::Run()
 		{
 			std::cout << "========================================SERVERS COMMANDS========================================\n";
 			std::cout << "init		:	Initialize GameObjects with default samples\n";
-			std::cout << "help		:	Display this informations message\n";
+			std::cout << "help		:	Display this information message\n";
 			std::cout << "creation_test		:	Create Player 'Valere' for replication tests purposes\n";
 			std::cout << "edition_test		:	Edit 1st GameObject Position X value for replication tests purposes\n";
 			std::cout << "deletion_test		:	Delete 1st GameObject for replication tests purposes\n";
