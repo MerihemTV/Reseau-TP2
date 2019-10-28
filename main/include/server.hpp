@@ -27,4 +27,5 @@ private:
 	std::shared_ptr<uvw::Loop> loop; 
 	std::unique_ptr<std::thread> loopThread;
 	std::vector<std::shared_ptr<uvw::TCPHandle>> clients;
+	std::shared_ptr<uvw::TCPHandle> tcp;
 };

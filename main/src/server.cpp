@@ -1,9 +1,9 @@
 #include "server.hpp"
 
 void Server::listenServer(uvw::Loop& loop) {
-	std::shared_ptr<uvw::TCPHandle> tcp = loop.resource<uvw::TCPHandle>();
+	tcp = loop.resource<uvw::TCPHandle>();
 
-	tcp->on<uvw::ListenEvent>([tcp,this](const uvw::ListenEvent&, uvw::TCPHandle& srv) {
+	tcp->on<uvw::ListenEvent>([this](const uvw::ListenEvent&, uvw::TCPHandle& srv) {
 		std::shared_ptr<uvw::TCPHandle> client = srv.loop().resource<uvw::TCPHandle>();
 		std::cout << "New connection" << std::endl;
 
@@ -39,6 +39,11 @@ Server::Server(std::string addr, int port) {
 }
 
 Server::~Server() {
+	tcp->close();
+
+	std::for_each(clients.begin(), clients.end(), [](auto cl) {
+		cl->close(); });
+
 	if (loopThread->joinable()) {
 		loopThread->join();
 	}
