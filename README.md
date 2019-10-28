@@ -12,6 +12,7 @@ using C++ 17
  
 #Running
 
+#Launching
 type the command below in the directory out/build/Debug-to run our program
 
 ~tp2.exe mode addr_server port_server
@@ -36,7 +37,8 @@ exit : quit program
 
 The Server will display when detecting a new connection and feedbacks at each executed command
 
-#Project Comment
+#Project Comments
+
 #Recommended behavior as testing our program
 1) Create a server instance
 2) Create to clients
@@ -48,4 +50,8 @@ The Server will display when detecting a new connection and feedbacks at each ex
 8) deletion_test
 9) Send data
 10) exit server (clients will be disconnected)
+
+#Coder's note
+Our program is a proof of concept that we can make a Network Replication System.
+As our program does not  run as a real game, the project can be cloned and fit with this kind of behaviour with a few modifications.
 
